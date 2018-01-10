@@ -1,0 +1,28 @@
+%
+% Inhaltsverzeichnis
+%
+
+% --> Seitennummerierung römisch
+\pagenumbering{Roman}
+\setcounter{page}{1}
+\pdfbookmark[1]{Inhaltsverzeichnis}{toc}
+
+\tableofcontents
+\cleardoublepage
+
+%
+% Abbildungs- und Tabellenverzeichnis
+%
+\listoffigures
+\listoftables
+\cleardoublepage
+
+%
+% Abkürzungsverzeichnis ausgeben
+%
+\markboth{Abkürzungsverzeichnis}{Abkürzungsverzeichnis} % Kopfzeile anpassen, vgl. http://www.golatex.de/falsche-kopfzeile-im-abkuerzungsverzeichnis-t2074.html
+\printnomenclature % Abkürzungsverzeichnis
+\cleardoublepage
+%
+% EOF
+%

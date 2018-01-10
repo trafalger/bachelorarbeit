@@ -1,0 +1,48 @@
+%
+% Hauptdatei
+%
+
+\input{header}  % Einbinden der Konfigurationen
+
+\begin{document}
+
+
+\input{chapters/titelseite}
+
+
+
+% pagestyle umschalten
+\pagestyle{diplHeadings}
+
+\input{listings/abkuerzungsvz} % Einbinden der zentralen Datei, die alle Abkürzungen enthält
+\include{listings/listings} % Inhalts-, Abbildungs-, Tabellenverzeichnis und Abkürzungsverzeichnis laden (und ausgeben)
+
+% KAPITEL
+% --> Seitennummerierung wieder arabisch
+\pagenumbering{arabic}
+\setcounter{page}{1}
+\include{chapters/abstract}
+\include{chapters/einleitung}
+\include{chapters/kapitel1}
+\include{chapters/grundlagenneu}
+\include{chapters/kapitel2neu}
+\include{chapters/kapitel1neu}
+\cleardoublepage
+
+% Anhang
+\appendix
+\include{chapters/anhang}
+\cleardoublepage
+
+\phantomsection % benötigt für korrekte pdf-darstellung
+\addcontentsline{toc}{chapter}{Literaturverzeichnis}
+\bibliographystyle{natdin} % Din 1505 nach Lorenzen (Das konkrete Aussehen des Litverzeichnisses ist im header festgelegt)
+\bibliography{bibliography/literatur}  % Pfad zur *.bib-Datei (Dateiendung wird weggelassen)
+\cleardoublepage
+
+\include{_eidversicherung}
+
+\end{document}
+%
+% EOF
+%

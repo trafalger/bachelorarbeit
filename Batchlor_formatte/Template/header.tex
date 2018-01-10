@@ -1,0 +1,161 @@
+
+\documentclass[pdftex,a4paper,11pt,DIV15,BCOR20mm,parskip,numbers=noenddot]{scrbook}
+
+	\usepackage{german, ngerman} %Deutsche Trennungen, Anführungsstriche und mehr
+	\usepackage[ngerman,german]{babel} % dt. Sprache laden (u.a. auch Ausgabe feststehender Begriffe in deutsch wie etwa Inhaltsverzeichnis statt table of contents)
+	\usepackage[latin1]{inputenc} % Zeichenkodierung laden für Unix/Windows-Systeme
+	\usepackage[babel,german=quotes]{csquotes} % Deutsche Eingabe von ü,ä,ö,ß erlauben	
+	\usepackage[T1]{fontenc}
+  \usepackage[pdftex]{color} 
+  \usepackage{setspace} % Das Paket setspace ermöglicht ein einfaches Umstellen von normalem, anderthalbfachen oder doppeltem Zeilenabstand.
+  \usepackage{graphics} %Zum Einbinden von Grafiken
+  \usepackage[pdftex]{graphicx}  
+	\usepackage[final]{listings}  % ermöglicht die Darstellung von (Programm-)Quellcode in der Arbeit
+  \usepackage{ae,aecompl}  % benötigt zur PDF-Erzeugung, vgl http://dsanta.users.ch/resources/type1.html
+  \usepackage[normalem]{ulem} % ermöglicht das Unterstreichen von Text
+  \usepackage{amsfonts} % ok-zeichen usw
+  \usepackage{scrpage2}
+  \usepackage{bibgerm}
+  \usepackage{array} % für tabellen
+
+	% Beliebige Farben definieren (bei Bedarf auskommentieren und selbst benennen und festlegen)
+%	\definecolor{hellblau}{RGB}{238,242,247}
+	
+	\usepackage{colortbl} % für farbige Tabellen
+	\usepackage{longtable} % für mehrseitige Tabellen
+%	\usepackage{booktabs} % für tabellen: baut \midrule, \toprule und \bottomrule ein
+%	\setlength{\tabcolsep}{30pt} % in Tabellen: Padding des Spalten nach links und rechts
+	\renewcommand{\arraystretch}{1.25} % in Tabellen: Padding des Textes nach oben und unten in Prozent
+
+	% Benutzt man bestimmte Spaltendefinitionen (hier: Spaltentyp p mit 25% Breite) öfter, kann man diese hier auslagern und unter einem bestimmten Buchstaben (hier: A) speichern
+%	\newcolumntype{A}{p{0.25\textwidth}} 
+
+	\usepackage{nomencl} % Package für ein Abkürzungsverzeichnis
+	\renewcommand{\nomname}{Abkürzungsverzeichnis} % Deutsche Überschrift
+	\setlength{\nomlabelwidth}{.20\hsize} % Breite eines Eintrags
+	\renewcommand{\nomlabel}[1]{#1 \dotfill} % Auffüllen mit Punkten
+	\setlength{\nomitemsep}{-2\parsep} % Zeilenabstand verkleinern
+	\makenomenclature  % Datenbank des Abkürzungsverzeichnisses beim Kompilieren des Textes erzeugen
+
+	% fuer Literaturverweise
+	\usepackage[numbers,square]{natbib}
+	\bibpunct{[}{]}{;}{a}{}{;} % Natbib konfigurieren, so daß im text [Müller 2006] erscheint und keine runden Klammern o.ä.
+	\renewcommand{\cite}{\citep} % \cite zu \citep umwandeln, so dass im Text \cite{Mueller.2006} für Referenzen verwendet werden kann.
+%	\usepackage{url} % damit im LitVZ auch so etwas wie 'Müller 2006: Vortrag zum Thema XY (Powerpoint-Präsentation)' steht; (Dateiendungen werden also textuell repräsentiert)
+
+	%% Verhindert, dass im Literaturverzeichnis nach der Nennung von [Mueller 2006] die Seite umgebrochen wird und die Autoren + Buchtitel etc. auf der nächsten Seite landen
+	%% Es wurde daher \noparagraphbreak in der natdin.bst bei der Ausgabe der Elemente ergänzt
+	%% siehe http://groups.google.de/group/de.comp.text.tex/browse_thread/thread/9ca4c681e2063fbd/f7eb3eec044b058e
+	\makeatletter
+	\def\noparagraphbreak{\interlinepenalty10000
+	  \@itempenalty-\@highpenalty}
+	\makeatother 
+
+
+	% Fußnoten werden im gesamten Dokument fortlaufend hochgezählt und nicht nur kapitelweise, vgl. http://www.golatex.de/nummerierung-der-fussnoten-durchgehend-im-gesamten-dokument-t2042.html
+	\usepackage{chngcntr}
+	\counterwithout{footnote}{chapter}
+
+	\setlength{\emergencystretch}{1em} % Für den Fall, dass Zeilen im 1. Anlauf nicht richtig umgebrochen werden können, einen 'Notfallraum' einrichten (vgl. http://www.golatex.de/overfull-boxes-in-latex-t1979.html) 
+
+	% Definitionen werden mit Hilfe von 'dfn' eingeleitet und können somit zentral formatiert werden.
+	\newtheorem{dfn}{Definition}
+	
+	% entnommen aus http://www.siart.de/typografie/latextipps.xhtml#floats
+	\renewcommand{\floatpagefraction}{0.8} % gibt den Bruchteil einer Seite, die für Gleitobjekte benutzt wird, an, der erreicht werden muss, bevor eine neue Seite angefangen wird. (Standard: 0.5; d.h. wenn ein Bild 51% der Seite einnimmt, wird extra für dieses Bild eine ganze Seite reserviert --> unschön)
+	\renewcommand{\topfraction}      {0.8}
+	\renewcommand{\bottomfraction}   {0.5} % \topfraction / \bottomfraction, gibt den Bruchteil einer Seite an, bis zu dem Gleitobjekte oben bzw. unten angeordnet werden sollen.
+	\renewcommand{\textfraction}     {0.15} % gibt den Bruchteil einer Seite an, der mit Text belegt werden können muss.
+	\makeatletter
+	  \setlength{\@fptop}{0pt} % Wenn ein Float-Objekt allein auf einer Seite steht, soll es am oberen Rand der Seite erscheinen und nicht vertikal zentriert
+	\makeatother
+	
+	% schrift auf palatino umstellen
+  \usepackage{palatino}
+  \setkomafont{sectioning}{\normalcolor\bfseries}
+
+
+	% PDF-Support einbinden und konfigurieren
+  \usepackage[
+  	pdfstartview={Fit},   
+  	pdffitwindow=true,
+  	colorlinks,
+  	linkcolor=black,
+  	anchorcolor=black,
+  	citecolor=black,
+  	urlcolor=black
+  ]{hyperref}
+  \hypersetup
+  {
+  	pdftitle     = {Diplomarbeit zum Thema Sprachverarbeitung mit fokusierung auf Vocaltrennung mit hilfe eines LSTM-Netzes},
+  	pdfsubject   = {Universität Hamburg / Department Informatik / ITG / Bachlorarbeit},
+  	pdfauthor    = {Wajid Ghafoor},
+  	pdfkeywords  = {Bachlorarbeit, Universität Hamburg}, % Hier kann eine beliebige Liste von Schlüsselwörtern eingegeben werden, die z.B. Windows zur Indexierung/Suche benutzt
+  	plainpages   = false 
+  }
+ 
+   
+  % Zeilenabstand
+  \setstretch{1.24}   
+
+	% Strafpunkte, die beim Seitenumbruch vergeben werden, falls die erste Zeile eines Absatzes allein auf der vorangehenden Seite verbleibt. vgl http://www.jr-x.de/publikationen/latex/tipps/zeilenumbruch.html
+	\clubpenalty=150
+
+	% Strafpunkte, die beim Seitenumbruch vergeben werden, falls die letzte Zeile gerade noch auf die nächste Seite umgebrochen wird. vgl http://www.jr-x.de/publikationen/latex/tipps/zeilenumbruch.html
+	\widowpenalty=150  
+
+  % Pagestyle definieren (nach Martins Template)
+	\defpagestyle{diplHeadings}
+	{ % es folgt: Definition des Seitenkopfes: 
+	  % obere Linie
+		(0pt,0pt)
+		% linke Seite
+		{\upshape \rlap{\pagemark} \hfill \headmark \hfill} % auf einer linken Seite soll LINKS die Seitenzahl stehen und mittig die Headline (headmark)
+		% rechte Seite
+		{\upshape \hfill \headmark \hfill \llap{\pagemark}} % auf einer rechten Seite soll RECHTS die Seitenzahl stehen und mittig die Headline (headmark)
+		% falls Layout "one page"
+		{}
+		% untere Line
+		(\textwidth,1pt)
+	}
+	{ % es folgt: Definition des Seitenfußes: Wir wollen lediglich eine schwarze, über die komplette Seite gehende Linie erzeugen
+	  % obere Linie
+		(\textwidth,1pt)
+		% linke Seite
+		{}
+		% rechte Seite
+		{}
+		% falls Layout "one page"
+		{}
+		% untere Linie
+		(0pt,0pt)
+	}  
+	% Pagestyle auch für Chapter-Anfang einrichten
+	\renewcommand*{\chapterpagestyle}{diplHeadings}
+	\renewcommand*{\chapterheadstartvskip}{\vspace*{-\topskip}}
+	\automark[section]{chapter}
+
+
+	% Ränder	
+	\setlength{\textwidth}{15cm}        % Textbreite
+	\setlength{\textheight}{24cm}       % Texthöhe
+	\setlength{\topmargin}{-12mm}       % oberer Rand
+  
+ 
+  % Listingsformatierung (Quelltexte)
+  \definecolor{lightgrey}{rgb}{0.90,0.90,0.90}
+  \lstloadlanguages{XML}
+  \lstset{
+    tabsize=2,
+    escapeinside={(*@}{@*)},
+    captionpos=t,
+    framerule=0pt,
+    backgroundcolor=\color{lightgrey},
+    basicstyle=\small\ttfamily,
+    keywordstyle=\small\bfseries,
+    numbers=left,
+    fontadjust
+  }    
+%
+% EOF
+%

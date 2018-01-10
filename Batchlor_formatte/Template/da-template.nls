@@ -1,0 +1,10 @@
+\begin{thenomenclature} 
+
+ \nomgroup{A}
+
+  \item [{IT}]\begingroup Informationstechnik\nomeqref {\relax 0.0}
+		\nompageref{I}
+  \item [{WWW}]\begingroup World Wide Web\nomeqref {\relax 0.0}
+		\nompageref{I}
+
+\end{thenomenclature}
